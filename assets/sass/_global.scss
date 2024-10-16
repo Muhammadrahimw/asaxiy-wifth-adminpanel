@@ -1,0 +1,42 @@
+@use "./variables" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter";
+}
+
+main {
+    background-color: $bg-color;
+}
+
+a {
+    text-decoration: none;
+    color: $black-color;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.hdg {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.prg {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.bprg {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sprg {
+    font-size: 0.75em;
+    font-weight: 400;
+}

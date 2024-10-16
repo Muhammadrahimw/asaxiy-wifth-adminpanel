@@ -1,0 +1,100 @@
+@use "./variables" as *;
+
+.products {
+    padding: 2em 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1em;
+
+    .card {
+        border-radius: 1.25em;
+        background-color: $white-color;
+        padding: 1em;
+        width: 100%;
+
+        .img {
+            background-image: url("https://assets.asaxiy.uz/product/items/desktop/b7045dfe63270c1756cc5d02c22846842024010714424078436pwzq5I68VI.jpeg.webp");
+            width: 100%;
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            margin-top: 1em;
+            height: 39px;
+        }
+
+        .rating {
+            margin-top: 1em;
+            @include btw;
+
+            .stars {
+                color: $orange-color;
+                display: flex;
+                gap: 0.1em;
+            }
+
+            .comments {
+                color: $gray-color;
+                opacity: 0.8;
+            }
+        }
+
+        .price {
+            margin-top: 0.75em;
+
+            .real_price {
+                font-size: 0.75em;
+                color: $gray-color;
+                text-decoration: line-through;
+            }
+
+            .precent_price {
+                font-size: 1.15em;
+                font-weight: 700;
+                color: $main-color;
+                padding: 0.5em 0;
+            }
+
+            .monthly_price {
+                border: 2px solid $orange-color;
+                padding: 0.5em;
+                font-size: 0.9em;
+                font-weight: 500;
+                color: $orange-color;
+                background-color: transparent;
+                border-radius: 0.25em;
+            }
+        }
+
+        .adding_product {
+            margin-top: 1em;
+            @include btw;
+            gap: 0.5em;
+
+            .btn {
+                width: 100%;
+                height: 40px;
+                font-size: 0.8em;
+                color: $white-color;
+                background-color: $main-color;
+                border-radius: 0.6em;
+                border: none;
+            }
+
+            div {
+                width: 3.5em;
+                height: 40px;
+                border-radius: 0.6em;
+                background-color: $green-color;
+                color: $white-color;
+                @include center;
+            }
+        }
+    }
+}
