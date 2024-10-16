@@ -15,6 +15,9 @@ let acceptDeleteTwo = document.querySelector("#acceptDeleteTwo");
 let deleteValue = null;
 let preview = document.querySelector(".preview");
 let changeContainer = document.querySelector(".changeContainer");
+let changeItemTwo = document.querySelector("#changeItemTwo");
+let changeItem = document.querySelector("#changeItem");
+let otherP = document.querySelector(".otherP");
 
 fetch("http://localhost:3000/products")
   .then((data) => data.json())
@@ -25,17 +28,15 @@ postData.addEventListener("click", () => {
   info.style.display === "grid"
     ? accpet.click()
     : ((info.style.display = "grid"),
-      (forDeleteContainer.style.display = "none"));
+      (forDeleteContainer.style.display = "none"),
+      (changeContainer.style.display = "none"));
 });
 
 accpet.addEventListener("click", (e) => {
   e.preventDefault();
   let img = inputImg.files[0];
   let baseImg = "";
-  if (
-    (inputImg.files.length > 0 && inputImg.files[0].type === "image/jpeg") ||
-    inputImg.files[0].type === "image/png"
-  ) {
+  if (inputImg.files.length > 0 && inputImg.files[0].type === "image/jpeg") {
     let reader = new FileReader();
     reader.onload = function (event) {
       baseImg = event.target.result;
@@ -71,9 +72,11 @@ deleteData.addEventListener("click", (event) => {
   event.preventDefault();
   info.style.display !== "none"
     ? ((info.style.display = "none"),
+      (changeContainer.style.display = "none"),
       (forDeleteContainer.style.display = "flex"))
     : ((info.style.display = "grid"),
-      (forDeleteContainer.style.display = "none"));
+      (forDeleteContainer.style.display = "none"),
+      (changeContainer.style.display = "none"));
 });
 
 acceptDelete.addEventListener("click", () => {
@@ -146,11 +149,17 @@ acceptDeleteTwo.addEventListener("click", () => {
 putData.addEventListener("click", (event) => {
   event.preventDefault();
   info.style.display !== "none"
-    ? ((info.style.display = "none"), (changeContainer.style.display = "flex"))
-    : ((info.style.display = "grid"), (changeContainer.style.display = "none"));
+    ? ((info.style.display = "none"),
+      (changeContainer.style.display = "flex"),
+      (changeItem.style.display = "block"))
+    : ((info.style.display = "grid"),
+      (changeContainer.style.display = "none"),
+      (forDeleteContainer.style.display = "none"));
 });
 
-changeItem.addEventListener("click", () => {
+changeItem.addEventListener("click", (e) => {
+  e.preventDefault();
+  changeItem.style.display = "none";
   fetch("http://localhost:3000/products")
     .then((data) => data.json())
     .then((data) =>
@@ -158,6 +167,7 @@ changeItem.addEventListener("click", () => {
         if (item.id === forPut.value) {
           info.style.display = "grid";
           changeContainer.style.display = "none";
+          forDeleteContainer.style.display = "none";
           inputName.value = item.title;
           inputPrice.value = item.price;
           select.value = item.category;
@@ -198,6 +208,52 @@ changeItem.addEventListener("click", () => {
                 </div>
             </div>
 `;
+          accpet.style.display = "none";
+          changeContainer.style.display = "block";
+          forPut.style.display = "none";
+          otherP.style.display = "none";
+          changeItemTwo.style.display = "block";
+          changeItemTwo.addEventListener("click", (e) => {
+            let img = inputImg.files[0];
+            let baseImg = "";
+            if (!img) {
+              alert("rasm kiriting");
+            }
+            if (
+              inputImg.files[0].type === "image/jpeg" ||
+              inputImg.files[0].type === "image/jpg" ||
+              inputImg.files[0].type === "image/png" ||
+              inputImg.files[0].type === "image/webp"
+            ) {
+              let reader = new FileReader();
+              reader.onload = function (event) {
+                baseImg = event.target.result;
+
+                fetch(`http://localhost:3000/products/${item.id}`, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    id: `${item.id}`,
+                    img: baseImg,
+                    title: inputName.value,
+                    price: inputPrice.value,
+                    category: select.value,
+                  }),
+                })
+                  .then((data) => data.json())
+                  .then(
+                    (data) => console.log(data.length),
+                    alert("muvaffaqiyatli o'zgartirildi")
+                  )
+                  .catch((error) => console.log(error + ":("));
+              };
+              reader.readAsDataURL(img);
+            } else {
+              alert("faqat rasm kirita olasiz!");
+            }
+          });
           preview.append(card);
         }
       })

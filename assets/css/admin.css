@@ -15,6 +15,10 @@ a {
   margin: 0 auto;
 }
 
+body {
+  background-color: rgb(244, 247, 253);
+}
+
 main {
   padding-top: 2em;
   display: flex;
@@ -54,10 +58,6 @@ button {
 
 #put {
   grid-column: 1/3;
-}
-
-.preview {
-  /* display: none; */
 }
 
 .right {
@@ -131,7 +131,7 @@ select {
   border-radius: 1.25em;
   background-color: white;
   padding: 1em;
-  width: 70%;
+  width: 60%;
 }
 .card .img {
   background-image: url("https://assets.asaxiy.uz/product/items/desktop/b7045dfe63270c1756cc5d02c22846842024010714424078436pwzq5I68VI.jpeg.webp");
@@ -224,5 +224,11 @@ select {
 }
 
 #forPut {
+  margin-top: 0.5em;
+}
+
+#changeItemTwo {
+  display: none;
+  height: 2.5em;
   margin-top: 0.5em;
 }
