@@ -164,6 +164,13 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.products .card .img i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 .products .card .title {
   margin-top: 1em;

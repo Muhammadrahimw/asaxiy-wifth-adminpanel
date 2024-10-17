@@ -43,6 +43,10 @@ let house = document.getElementById("house");
 let book = document.getElementById("book");
 let tv = document.getElementById("tv");
 let laptop = document.getElementById("laptop");
+let localData = JSON.parse(localStorage.getItem("shopKey")) || [];
+let data = [...localData];
+let otherData = JSON.parse(localStorage.getItem("isLike")) || [];
+let arrData = [otherData];
 
 let createCard = (info) => {
   let card = document.createElement("div");
@@ -52,7 +56,7 @@ let createCard = (info) => {
 <div class="card">
                 <div style="background-image: url(${
                   info.img
-                })" class="img"></div>
+                })" class="img"><i id="isliked" class="fa-regular fa-heart"></i></div>
                 <p class="title">${info.title}</p>
                 <div class="rating">
                     <div class="stars">
@@ -75,13 +79,20 @@ let createCard = (info) => {
                 </div>
                 <div class="adding_product">
                     <button class="btn">Купить в один клик</button>
-                    <div>
+                    <div class="addingShop" style="cursor: pointer;">
                         <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
                     </div>
                 </div>
             </div>
 `;
   products.append(card);
+  let addingShop = card.querySelector(".addingShop");
+
+  addingShop.addEventListener("click", (e) => {
+    data.push(info);
+    localStorage.setItem("shopKey", JSON.stringify(data));
+    console.log(data);
+  });
 };
 
 fetch("http://localhost:3000/products")
@@ -91,6 +102,14 @@ fetch("http://localhost:3000/products")
 
 let addData = (data) => {
   data.forEach((info) => {
+    // let oneObj = {
+    //   id: info.id,
+    //   isLike: false,
+    // };
+    // arrData.push(oneObj);
+    // console.log(arrData);
+    // localStorage.setItem("isLike", JSON.stringify(arrData));
+    // arrData = [];
     createCard(info);
     filterCategory(data, discount);
     filterCategory(data, air, "air");
