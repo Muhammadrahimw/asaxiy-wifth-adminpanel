@@ -45,8 +45,8 @@ let tv = document.getElementById("tv");
 let laptop = document.getElementById("laptop");
 let localData = JSON.parse(localStorage.getItem("shopKey")) || [];
 let data = [...localData];
-let otherData = JSON.parse(localStorage.getItem("isLike")) || [];
-let arrData = [otherData];
+// let otherData = JSON.parse(localStorage.getItem("isLike")) || [];
+// let arrData = [otherData];
 
 let createCard = (info) => {
   let card = document.createElement("div");
